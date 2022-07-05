@@ -87,7 +87,8 @@ btnToTop.addEventListener("click",scrollTop);
                 e.preventDefault();
                 let target = anchor.getAttribute("href");
                 let targetElement = document.querySelector(target);
-                let position = targetElement.getBoundingClientRect().top + window.offsetHeight;
+                // let position = targetElement.getBoundingClientRect().top + window.offsetHeight;
+                let position = targetElement.getBoundingClientRect().top + scrollY;
                 window.scrollTo({
                     top: position,
                     behavior: "smooth",
