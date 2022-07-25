@@ -146,3 +146,75 @@ window.addEventListener("DOMContentLoaded",function(){
     });
 
 });
+
+//==================================================
+//      アコーディオン
+//==================================================
+
+    // 変数
+        //-------------------------------------------
+        let accordionBtns = document.querySelectorAll("[data-accordion=btn]");
+        let accordionContents = document.querySelectorAll("[data-accordion=content]");
+        let align = false;   //コンテンツの高さを揃えるか？
+        let arrayHeights = new Array;
+    // 関数
+    //-------------------------------------------
+        function accordionSetHeight(){  //アコーディオンコンテンツの高さをセット
+            if(align === true){
+                let flag = document.querySelector("[data-flag=maxheight]");
+                if(flag){
+                    let resizeH = flag.clientHeight;
+                    accordionContents.forEach(function(content){
+                        if(content.childNodes[1].getAttribute("data-flag")){
+                            content.style.height = resizeH + "px";
+                        }else{
+                            content.style.height = resizeH + "px";
+                            content.childNodes[1].style.height = resizeH + "px";
+                        }
+                    });
+                }else{
+                    //アコーディオンコンテンツの中で一番高いコンテンツの高さを取得
+                    for(var i = 0; i < accordionContents.length; i++){
+                        arrayHeights[i] = accordionContents[i].childNodes[1].clientHeight;
+                    }
+                    var max = Math.max(...arrayHeights);
+
+                    accordionContents.forEach(function(content){
+                        var thisH = content.childNodes[1].clientHeight;
+                        if( thisH === max ){
+                            content.style.height = max + "px";
+                            content.childNodes[1].setAttribute("data-flag","maxheight");
+                        }else{
+                            content.style.height = max + "px";
+                            content.childNodes[1].style.height = max + "px";
+                        }
+                    });
+                }
+            }else{
+                accordionContents.forEach(function(content){
+                    let contentH = content.childNodes[1].clientHeight;
+                    content.style.height = contentH + "px";
+                });
+            }
+        }
+        function accordionSwitch(){     //クリックしたときの開閉処理
+        accordionBtns.forEach(function(accordionBtn){
+            accordionBtn.addEventListener("click",function(){
+                let content = accordionBtn.nextElementSibling;
+                if(content.classList.contains("is-hide")){
+                    content.classList.remove("is-hide");
+                    accordionBtn.classList.add("active");
+                }else{
+                    content.classList.add("is-hide");
+                    accordionBtn.classList.remove("active");
+                }
+            });
+        });
+    }
+    // 実行
+    //-------------------------------------------
+        window.addEventListener("DOMContentLoaded",function(){
+            accordionSetHeight();
+            accordionSwitch();
+        });
+        window.addEventListener("resize",accordionSetHeight);
