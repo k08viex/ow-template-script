@@ -213,7 +213,7 @@ window.addEventListener("DOMContentLoaded",function(){
     }
     // 実行
     //-------------------------------------------
-        window.addEventListener("DOMContentLoaded",function(){
+        window.addEventListener("load",function(){
             accordionSetHeight();
             accordionSwitch();
         });
