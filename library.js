@@ -7,12 +7,13 @@ let viewpointBtnToTop = 100;    //このスクロール量に達したら表示
 let btnToTop = document.querySelector("[data-btn=to-top]");
 
 function viewBtnToTop(){
-    if(btnToTop != null)
-    let scrollY = window.scrollY;   //スクロール量
-    if(scrollY > viewpointBtnToTop){    //スクロール量がviewpointの値を超えたら
-        btnToTop.classList.add("is-visible");
-    }else{
-        btnToTop.classList.remove("is-visible");
+    if(btnToTop != null) {
+        let scrollY = window.scrollY;   //スクロール量
+        if(scrollY > viewpointBtnToTop){    //スクロール量がviewpointの値を超えたら
+            btnToTop.classList.add("is-visible");
+        }else{
+            btnToTop.classList.remove("is-visible");
+        }
     }
 }
 
